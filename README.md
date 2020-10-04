@@ -2,7 +2,7 @@
 A funky stack that is lazy but fast
 
 ## Scenario
-We have to implement 3 operations on a stack-like list structure: "push \[value\]", "pop". Additionally, an increment operation, "inc \[i\] \[value\]", that adds \[value\] to the bottom \[i\] elements of the stack (\[value\] can be negative). The push and pop operations are fairly simple, but we want to make the increment operation "lazy". So, we'll need to modify them and implement the increment operation such that we don't do any direct calculation on the stack values until the user needs it (ie peeks the top value).
+We have to implement 3 operations on a stack-like list structure: `push [value]`, `pop`. Additionally, an increment operation, `inc [i] [value]`, that adds `[value]` to the bottom `[i]` elements of the stack (`[value]` can be negative). The push and pop operations are fairly simple, but we want to make the increment operation "lazy". So, we'll need to modify them and implement the increment operation such that we don't do any direct calculation on the stack values until the user needs it (ie peeks the top value).
 
 The idea is that a lazy increment is an optimization that does less processing at the time that the instruction is applied. We need do some accounting with a running sum of value increments at each applicable index. When the value is retrieved, we'll have an extra arithmetic operation that accounts for any past increment operation that should have been applied to it. This is supposed to be faster than adding the values to each of the bottom elements at the moment that the increment function is called, especially when you have a very large stack and many increments on a significant bottom portion of the stack.
 
@@ -239,9 +239,9 @@ The approach to make the increment lazy is to use another collection to account 
 
 Observe that
 
-    1. after each processing of an instruction, we have an intermediate print out of the stack, and it shows the "unincremented" elements, but...
+- after each processing of an instruction, we have an intermediate print out of the stack, and it shows the "unincremented" elements, but...
     
-    2. when we simulate the user examining the elements at the top of the actual stack, the values are consistent to what they should be when the increment operations were applied. 
+- when we simulate the user examining the elements at the top of the actual stack, the values are consistent to what they should be when the increment operations were applied. 
 
 \*Outside the scope of this demonstration, this could be improved by a "maintenance" in processor idle time: applying the collective increments when the user is not interacting with the stack, then freeing up space.
 
