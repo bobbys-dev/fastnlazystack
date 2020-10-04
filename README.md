@@ -403,6 +403,6 @@ do_it_better(number_of_instructions=20000)
     
 
 ### So, after 20000 randomized pop/push/inc instructions, the lazy stack speed up is 10 times faster over the baseline (0.1 s vs 1 s)! 😎
-Most of the speedup come from not increment each and every value when the increment instruction is received, and postponing the increments until the data is actually read. Integrating the value increments so that just one addition is done on the read also saves time.
+Most of the speedup comes from not incrementing each and every value when the `inc` instruction is received, and postponing the increments until the data is actually read. Integrating the value increments so that just one addition is done on the read also saves time.
 
 The `incs` dictionary stores minimal but precise information to make this work!
